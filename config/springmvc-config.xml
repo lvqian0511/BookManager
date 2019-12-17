@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+		
+	<!-- 配置处理器Handle，映射"/FirstController"请求  -->
+	<!-- <bean name="/firstController" class="edu.hebeu.controller.FirstController"/> -->
+	<!-- 可以不加驱动  -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	 <!-- 静态资源映射 location是本地静态资源路径 mapping是映射的url地址，访问时就使用该地址 -->
+       <!--处理静态资源-->
+    <mvc:default-servlet-handler/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+    <mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
+
+	
+	
+	<context:component-scan base-package="edu.hebeu.controller"/>
+	
+	<!-- 处理器映射器，将处理器Handle的name作为url进行查找   -->
+    <!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean> -->
+	<!--  处理器适配器，配置对处理器中handleRequest()方法的调用-->
+	<!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean> -->
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/user/"/>
+        <property name="suffix" value=".jsp"/>
+       <!--  <property name="prefix" value="/WEB-INF/book/"/>
+        <property name="suffix" value=".jsp"/> -->
+    </bean>
+</beans>
